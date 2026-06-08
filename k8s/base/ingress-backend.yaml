@@ -1,0 +1,20 @@
+# Ingress du backend.
+# Dans le namespace "backend" (le même que le Service ciblé).
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: backend
+  namespace: backend
+spec:
+  ingressClassName: nginx
+  rules:
+    - host: api.journalintime.eu
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: backend-jaxrs-liquibase-graphql-api
+                port:
+                  number: 8080

@@ -1,5 +1,9 @@
 apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
 resources:
+  # Namespace "infra" : réservé aux futures ressources transverses du cluster.
+  # (Les Ingress ci-dessous ne vivent PAS ici : ils doivent être dans le namespace
+  #  de leur Service cible — frontend / backend.)
   - namespace.yaml
-  - ingress.yaml
+  - ingress-frontend.yaml   # routage journalintime.eu     -> service frontend (ns frontend)
+  - ingress-backend.yaml    # routage api.journalintime.eu -> service backend  (ns backend)
